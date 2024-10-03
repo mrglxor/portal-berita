@@ -43,7 +43,7 @@ export default function UserDashboard({ user }) {
       method: "POST",
     });
     setLoading(false);
-    router.push("/auth");
+    router.push("/");
   };
 
   return (

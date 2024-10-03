@@ -4,9 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { FaSearch, FaFileAlt } from "react-icons/fa";
 
-const Nav = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+const Nav = ({ isLoggedIn }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 

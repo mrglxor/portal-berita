@@ -15,7 +15,7 @@ async function fetchArticleData(id) {
 
 async function fetchMoreArticles(authorId) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/articles/author/${authorId}?status=published`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/articles/author/${authorId}?status=published&limit=5`,
     { cache: "no-store" }
   );
   if (!res.ok) throw new Error("Failed to fetch more articles");
@@ -48,7 +48,11 @@ export default async function DetailBerita({ params }) {
           <div className="flex flex-row gap-x-2">
             <div className="border border-hint rounded-full w-[50px] h-[50px] bg-border">
               <img
-                src={author?.gambar}
+                src={
+                  author?.role === "user"
+                    ? `/images/${author.gambar}`
+                    : author.gambar
+                }
                 alt="Author"
                 className="object-cover rounded-full"
               />

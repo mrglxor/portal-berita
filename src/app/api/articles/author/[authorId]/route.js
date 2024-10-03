@@ -21,16 +21,12 @@ export async function GET(request, { params }) {
     let articles;
     let totalArticles;
 
-    if (status === "draft" || status === "published") {
-      articles = await Article.find(filter).sort({ tanggal: -1 });
-      totalArticles = articles.length;
-    } else {
-      totalArticles = await Article.countDocuments(filter);
-      articles = await Article.find(filter)
-        .sort({ tanggal: -1 })
-        .skip((page - 1) * limit)
-        .limit(limit);
-    }
+    articles = await Article.find(filter)
+      .sort({ tanggal: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    totalArticles = await Article.countDocuments(filter);
 
     const count = {
       drafted: await Article.countDocuments({ authorId, status: "draft" }),
