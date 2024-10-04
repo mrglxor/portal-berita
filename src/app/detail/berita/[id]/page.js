@@ -2,6 +2,8 @@ import Footer from "@/app/Components/Footer";
 import Header from "@/app/Components/Header";
 import { FaRegStar } from "react-icons/fa6";
 import Link from "next/link";
+import RatingComponent from "@/app/Components/RatingComponent";
+import { authMiddleware } from "../../../../../middleware/authMiddleware";
 
 async function fetchArticleData(id) {
   const res = await fetch(
@@ -27,6 +29,7 @@ export default async function DetailBerita({ params }) {
   const { id } = params;
 
   try {
+    const user = await authMiddleware();
     const data = await fetchArticleData(id);
     const moreArticles = await fetchMoreArticles(data.article.authorId);
 
@@ -69,7 +72,13 @@ export default async function DetailBerita({ params }) {
                   <FaRegStar className="text-primary" />
                   <FaRegStar className="text-primary" /> <FaRegStar />
                 </div>
-                <p className="text-sm font-bold">(16,190)</p>
+                <p className="text-sm font-bold text-dark">
+                  ({" "}
+                  <span className="text-primary text-xs">
+                    {article?.ratings.totalStars}
+                  </span>{" "}
+                  ) • {article?.ratings.totalRatings} Ratings
+                </p>
               </div>
             ) : (
               <div className="my-auto ml-10 flex flex-row items-center">
@@ -158,16 +167,7 @@ export default async function DetailBerita({ params }) {
             </div>
             <div className="mt-6">
               {article?.status === "published" ? (
-                <div className="flex items-center gap">
-                  <p className="font-bold">Beri Rating:</p>
-                  <div className="flex flex-row ml-1">
-                    <FaRegStar className="hover:text-primary" />
-                    <FaRegStar className="hover:text-primary" />
-                    <FaRegStar className="hover:text-primary" />
-                    <FaRegStar className="hover:text-primary" />
-                    <FaRegStar className="hover:text-primary" />
-                  </div>
-                </div>
+                <RatingComponent articleId={article._id} authorId={author._id} userId={user.userId} />
               ) : (
                 <div className="my-auto ml-10 flex flex-row items-center">
                   <p className="text-sm text-yellow-600">

@@ -13,6 +13,20 @@ const ArticleSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  ratings: {
+    totalStars: { type: Number, default: 0 },
+    totalRatings: { type: Number, default: 0 },
+    userRatings: [
+      {
+        userId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+          required: true,
+        },
+        stars: { type: Number, required: true, min: 1, max: 5 },
+      },
+    ],
+  },
 });
 
 const Article =

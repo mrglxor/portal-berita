@@ -2,3 +2,12 @@
 POST http://localhost:3000/api/auth/logout
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmY2OWFlNWNiZDY4ZDFmZGMzOTEwZTQiLCJuYW1hIjoiTXVoYW1hZCBGYXJoYW4iLCJlbWFpbCI6Im11aGFtYWRmYXJoYW4uaW5jQGdtYWlsLmNvbSIsInByb2Zlc2kiOiJGdWxsc3RhY2sgRGV2IiwiZ2FtYmFyIjoiaHR0cHM6Ly9jb21pY3ZpbmUuZ2FtZXNwb3QuY29tL2EvdXBsb2Fkcy9zY2FsZV9zdXBlci8xMTE2MC8xMTE2MDU4MDUvODY4NzQ5Ni1tb25rZXlfZF9fbHVmZnlfX2dlYXJfNV9fX191cGRhdGVkX2J5X2JfYV9pX29fcl9lX3RfdF9vX2RmM2dlenctZnVsbHZpZXcucG5nIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzI3NzEwNjY2LCJleHAiOjE3Mjc3MTQyNjZ9.FLMCVfJAa2RzzW1LxCXsqirZxRkNYZdEGzAdfOkMCGI
+
+### rate
+POST http://localhost:3000/api/articles/66f6570cb3a4cc0cbcf248ee/rate
+Content-Type: application/json
+
+{
+    "userId": "66fb683fbdea142d099d7bea",
+    "stars": 5
+}
