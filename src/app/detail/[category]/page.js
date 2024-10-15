@@ -13,7 +13,7 @@ export default function CategoryDetail() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const res = await fetch(`/api/articles?category=${category}`, {
+        const res = await fetch(`/api/articles?category=${category}&status=published`, {
           cache: "no-store",
         });
 

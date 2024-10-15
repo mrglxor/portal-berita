@@ -67,7 +67,7 @@ export default async function DetailBerita({ params }) {
           })}
           - <b>{article?.kategori}</b>
         </p>
-        <p className="text-5xl font-bold text-center">{article?.judul}</p>
+        <p className="text-2xl lg:text-5xl font-bold text-center py-5 px-7">{article?.judul}</p>
         <div className="flex flex-row gap-x-2">
           <div className="border border-hint rounded-full w-[50px] h-[50px] bg-border">
             <img

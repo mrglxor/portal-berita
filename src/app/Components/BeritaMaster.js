@@ -3,23 +3,22 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-export default function PublishedContent({ user }) {
+export default function BeritaMaster({ user }) {
+  const [articles, setArticles] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [articles, setArticles] = useState([]);
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     const fetchArticles = async () => {
+      setLoading(true);
       try {
-        const res = await fetch(
-          `/api/articles/author/${user.userId}?status=published`
-        );
+        const res = await fetch(`/api/articles?status=published`);
         const data = await res.json();
 
         if (data.success) {
-          setArticles(data.data);
+          setArticles(data.data.articles);
         } else {
           console.error(data.message);
         }
@@ -29,9 +28,8 @@ export default function PublishedContent({ user }) {
         setLoading(false);
       }
     };
-
     fetchArticles();
-  }, [user.userId]);
+  }, []);
 
   if (loading) return <p>Loading...</p>;
 
@@ -41,7 +39,24 @@ export default function PublishedContent({ user }) {
       method: "POST",
     });
     setLoading(false);
-    router.push("/auth");
+    router.push("/");
+  };
+
+  const handleCancel = async (articleId, e) => {
+    e.preventDefault();
+    const confirmation = confirm("Batalkan berita ini?");
+    if (!confirmation) return;
+
+    const response = await fetch(`/api/articles/cancel/${articleId}`, {
+      method: "POST",
+    });
+
+    if (response.ok) {
+      window.location.reload();
+    } else {
+      const errorData = await response.json();
+      alert(errorData.message || "Terjadi kesalahan saat menyetujui artikel.");
+    }
   };
 
   return (
@@ -73,7 +88,7 @@ export default function PublishedContent({ user }) {
       >
         <div className="p-5 relative">
           <h2 className="text-2xl font-bold">
-            <a href="/dashboard">Dashboard</a>
+            <a href="/dashboard">Admin</a>
           </h2>
           <button
             className="absolute top-4 right-4 lg:hidden"
@@ -99,9 +114,9 @@ export default function PublishedContent({ user }) {
           <ul>
             <li>
               <a
-                href="/berita/drafted"
+                href="/dashboard"
                 className={`block p-4 hover:bg-gray-700 ${
-                  pathname === "/berita/drafted" ? "bg-gray-700" : ""
+                  pathname === "/dashboard" ? "bg-gray-700" : ""
                 }`}
               >
                 Drafted News
@@ -109,12 +124,17 @@ export default function PublishedContent({ user }) {
             </li>
             <li>
               <a
-                href="/berita/published"
+                href="/berita/master"
                 className={`block p-4 hover:bg-gray-700 ${
-                  pathname === "/berita/published" ? "bg-gray-700" : ""
+                  pathname === "/berita/master" ? "bg-gray-700" : ""
                 }`}
               >
                 Published News
+              </a>
+            </li>
+            <li>
+              <a href="#" className="block p-4 hover:bg-gray-700">
+                <span className="text-amber-600">Monetization Sys</span>
               </a>
             </li>
           </ul>
@@ -138,7 +158,7 @@ export default function PublishedContent({ user }) {
             <div className="flex items-center space-x-2">
               <span>{user.nama}</span>
               <img
-                src={`/images/${user.gambar}`}
+                src={user.gambar}
                 alt="Profile"
                 width={40}
                 height={40}
@@ -156,11 +176,11 @@ export default function PublishedContent({ user }) {
 
         <main className="p-4 flex-1">
           <div className="mt-12">
-            <h2 className="text-xl font-bold mb-4">Berita Published mu</h2>
+            <h2 className="text-xl font-bold mb-4">Berita Published</h2>
             <div className="overflow-x-auto">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
                 {articles.length === 0 ? (
-                  <p>Buat berita mu sekarang!</p>
+                  <p>Berita published masih kosong!</p>
                 ) : (
                   articles.map((article) => (
                     <div
@@ -190,6 +210,15 @@ export default function PublishedContent({ user }) {
                       <p className="text-sm text-gray-600 mb-2 line-clamp-2">
                         {article.isinya}
                       </p>
+                      <div className="gap-x-3 flex">
+                        <button
+                          type="submit"
+                          onClick={(e) => handleCancel(article._id, e)}
+                          className="bg-red-500 border border-red-500 text-white px-3 py-1 rounded hover:text-red-500 hover:bg-white"
+                        >
+                          Batalkan
+                        </button>
+                      </div>
                     </div>
                   ))
                 )}

@@ -4,31 +4,29 @@ import Article from "../../../../models/Article";
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const category = searchParams.get("category");
-
-  if (!category) {
-    return new Response(
-      JSON.stringify({
-        success: false,
-        message: "Category is required",
-      }),
-      {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-  }
+  const status = searchParams.get("status");
+  const limit = parseInt(searchParams.get("limit"));
 
   try {
     await connectToDatabase();
 
-    const articles = await Article.find({
-      kategori: category,
-      status: "published",
-    }).sort({
-      tanggal: -1,
-    });
+    // Build the query object
+    const query = {};
+
+    // Add category to the query if provided
+    if (category) {
+      query.kategori = category;
+    }
+
+    // Add status to the query if provided
+    if (status) {
+      query.status = status;
+    }
+
+    // Find articles with optional limit
+    const articles = await Article.find(query)
+      .sort({ tanggal: -1 })
+      .limit(limit || 0); // Use the limit if provided, else fetch all
 
     return new Response(
       JSON.stringify({
