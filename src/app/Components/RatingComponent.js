@@ -4,7 +4,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaRegStar } from "react-icons/fa6";
 
-export default function RatingComponent({ articleId, authorId, userId }) {
+export default function RatingComponent({
+  articleId,
+  authorId,
+  userId,
+  userRating,
+}) {
   const router = useRouter();
   const [hoveredStar, setHoveredStar] = useState(0);
   const [selectedStar, setSelectedStar] = useState(0);
@@ -72,6 +77,10 @@ export default function RatingComponent({ articleId, authorId, userId }) {
         userId === authorId ? (
           <p className="text-yellow-600">
             Anda adalah penulis artikel ini dan tidak dapat memberikan rating.
+          </p>
+        ) : userRating ? (
+          <p className="text-yellow-600">
+            Anda sudah memberi rating pada artikel ini.
           </p>
         ) : (
           <div>

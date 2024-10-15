@@ -1,0 +1,54 @@
+table user:
++ ID - ObjectId
++ NAMA - String
++ GAMBAR - String - Optional
++ PROFESI - String - Optional
++ EMAIL - String
++ ROLE - Enum
++ PASSWORD - String
+
+table artikel:
++ ID - ObjectId
++ JUDUL - String
++ TANGGAL - Date
++ KATEGORI - String
++ GAMBAR - String
++ ISINYA - String
++ status - Enum
++ url - String - Optional
++ + AUTHORID
+
+
+data landingpage:
+
++ data banners [4 data] :
++ + ID artikel
++ + JUDUL
++ + TANGGAL
++ + KATEGORI
++ + GAMBAR
+
++ data cards {latest trend news} [9 data] :
++ + ID artikel
++ + JUDUL
++ + TANGGAL
++ + GAMBAR
+
+data detailberita by id articles:
+
++ data articles
++ + author id
+
+by id author:
+
++ data users
+
+by id category:
+
++ data articles
+
+Analys backend:
+
+-+- 5 api
+-+- 2 collection/table
+-+- 6 connection

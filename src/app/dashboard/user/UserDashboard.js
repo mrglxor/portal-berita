@@ -112,6 +112,11 @@ export default function UserDashboard({ user }) {
                 Published News
               </a>
             </li>
+            <li>
+              <a href="#" className="block p-4 hover:bg-gray-700">
+                <span className="text-green-400">Monetization News</span> [Coming Soon]
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -199,7 +204,9 @@ export default function UserDashboard({ user }) {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-600 hover:underline"
-                        >Lihat detail</a>
+                        >
+                          Lihat detail
+                        </a>
                       </p>
                       <p className="text-sm text-gray-600 mb-2 line-clamp-2">
                         {article.isinya}

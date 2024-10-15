@@ -7,27 +7,27 @@ const Footer = () => {
         <p className="text-hint text-sm">
           Copyright @ 2024 All Rights Reserved
         </p>
-        <div className="flex space-x-2">
+        <div className="flex space-x-3">
           <a
             href="https://instagram.com/hansworry"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaInstagram className="w-6 h-6 text-gray-600 hover:text-gray-900" />
+            <FaInstagram className="w-6 h-6 text-gray-600 hover:text-red-400" />
           </a>
           <a
             href="https://wa.me/6283804506486"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaWhatsapp className="w-6 h-6 text-gray-600 hover:text-gray-900" />
+            <FaWhatsapp className="w-6 h-6 text-gray-600 hover:text-green-400" />
           </a>
           <a
             href="https://linkedin.com/in/muhamadfarhaninc"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaLinkedin className="w-6 h-6 text-gray-600 hover:text-gray-900" />
+            <FaLinkedin className="w-6 h-6 text-gray-600 hover:text-blue-400" />
           </a>
         </div>
       </div>

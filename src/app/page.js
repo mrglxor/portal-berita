@@ -23,7 +23,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className="w-full max-w-full">
       <Header />
       <BannerSlider slides={banners} />
       <Line />
