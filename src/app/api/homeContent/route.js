@@ -4,7 +4,9 @@ import Article from "../../../../models/Article";
 export async function GET() {
   await connectToDatabase();
   try {
-    const articles = await Article.find({ status: "published" }).sort({ tanggal: 1 });
+    const articles = await Article.find({ status: "published" }).sort({
+      tanggal: -1,
+    });
 
     const banners = articles.slice(0, 4);
     const cards = articles.slice(4, 13);

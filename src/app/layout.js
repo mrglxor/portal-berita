@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import { initializeCron } from "../../lib/articlesCron";
 
 const expletusSans = localFont({
   src: "./fonts/ExpletusSans.ttf",
@@ -14,10 +13,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  if (typeof window === "undefined") {
-    initializeCron();
-  }
-
   return (
     <html lang="en">
       <head>

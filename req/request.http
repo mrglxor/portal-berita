@@ -61,3 +61,8 @@ Accept: application/json
   "email": "muhamadfarhan.inc@gmail.com",
   "password": "@MonkeyDDragon1"
 }
+
+### Cron
+GET http://localhost:3000/api/cron
+Authorization: Bearer dev.shkabf1234313C0RN214Rarew%4dasdgEqweqwasddseq.dev
+Content-Type: application/json
