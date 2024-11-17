@@ -38,18 +38,6 @@ NEWSAPI_LANGUAGE=id
 JWT_SECRET=jwtsecret
 ```
 
-untuk `development` bisa menggunakan ini:
-
-```bash
-MONGODB_URI=mongodb+srv://mongodbdev:mongodbdev@cluster0.cs9io.mongodb.net/portal_berita?retryWrites=true&w=majority&appName=Cluster0
-NEXT_PUBLIC_API_URL=http://localhost:3000
-NODE_ENV=development
-NEWSAPI_API_KEY=3f16d90f3b2e4a1a900819aed77a0155
-NEWSAPI_AUTHORID=66f54cbb62a74089222955c9
-NEWSAPI_LANGUAGE=id
-JWT_SECRET=f39ac278f1930c82d6fa3c1c2a7b6e73fc55bc734d9bf835f9e7a70b3b071f50b468f5abcf174645d4742a56ed937f67b95e5e2f9e3c17e47b509763d58d9f9b
-```
-
 5. run the development server:
 
 ```bash
